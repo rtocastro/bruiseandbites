@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #30FC8B;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -33,6 +33,14 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+/* this is for the title/entry page */
+img {
+justify-content: center;
+width: 100%;
+max-width: 1800px;
+height: auto;
 }
 
 button {
