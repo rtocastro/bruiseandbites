@@ -10,8 +10,8 @@ function App() {
   return (
     <>
     {/* adding image to for link later */}
-<img src={mainlogo} />
-<h1>THIS IS THE APP PAGE</h1>
+ <img src={mainlogo} />
+<h1>THIS IS THE APP/entry PAGE</h1>
     </>
   )
 }
