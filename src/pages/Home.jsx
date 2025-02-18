@@ -1,12 +1,14 @@
-import React from "react";
-import { Link }  from 'react-router-dom'
+import React from 'react';
+import menuicon from '../assets/menuicon.png'
+import NavTabs from '../components/NavTabs';
 
-//images for menus etc
-import menu from './assets/menuicon.png'
 
-export default function Home(){
+
+export default function Home() {
+  return (
     <>
-    <img src={menu} />
-    <h2>this is the landing for homepage</h2>
+      <NavTabs />
+      <h1>this is the HOME page</h1>
     </>
+  )
 }
