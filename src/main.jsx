@@ -6,6 +6,8 @@ import './index.css'
 //pages imported to router
 import Home from './pages/Home.jsx';
 import Entry from './pages/Entry.jsx'
+import Menu from './pages/Menu.jsx'
+import Discount from './pages/Discount.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
       {
         path: '/Home',
         element: <Home />,
+      },
+      {
+        path: '/Menu',
+        element: <Menu />,
+      },
+      {
+        path: '/Discount',
+        element: <Discount />,
       },
     ],
   },

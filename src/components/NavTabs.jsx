@@ -21,7 +21,47 @@ function NavTabs() {
                     to="/Home"
                     className={currentPage === '/Home' ? 'nav-link active' : 'nav-link'}
                 >
-                   {/* no clickable link */}
+                    {/* no clickable link */}
+                </Link>
+            </div>
+            <div className="nav-item">
+                <Link
+                    to="/Menu"
+                    className={currentPage === '/Menu' ? 'nav-link active' : 'nav-link'}
+                >
+                    <img src={menuicon} />
+                </Link>
+            </div>
+            <div className="nav-item">
+                <Link
+                    to="/Mission"
+                    className={currentPage === '/Mission' ? 'nav-link active' : 'nav-link'}
+                >
+                    Mission
+                </Link>
+            </div>
+            <div className="nav-item">
+                <Link
+                    to="/Contact"
+                    className={currentPage === '/Contact' ? 'nav-link active' : 'nav-link'}
+                >
+                    Contact
+                </Link>
+            </div>
+            <div className="nav-item">
+                <Link
+                    to="/Request"
+                    className={currentPage === '/Request' ? 'nav-link active' : 'nav-link'}
+                >
+                    Request
+                </Link>
+            </div>
+            <div className="nav-item">
+                <Link
+                    to="/Discount"
+                    className={currentPage === '/Discount' ? 'nav-link active' : 'nav-link'}
+                >
+                    {/* Discount page is not clickable */}
                 </Link>
             </div>
 
