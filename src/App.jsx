@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import './App.css'
@@ -13,7 +12,6 @@ function App() {
     {/* adding image to for link later */}
 <img src={mainlogo} />
 <h1>THIS IS THE APP PAGE</h1>
-<Outlet />
     </>
   )
 }
