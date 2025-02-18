@@ -8,6 +8,9 @@ import Home from './pages/Home.jsx';
 import Entry from './pages/Entry.jsx'
 import Menu from './pages/Menu.jsx'
 import Discount from './pages/Discount.jsx'
+import Mission from './pages/Mission.jsx'
+import Contact from './pages/Contact.jsx'
+import Request from './pages/Request.jsx'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,18 @@ const router = createBrowserRouter([
       {
         path: '/Discount',
         element: <Discount />,
+      },
+      {
+        path: '/Mission',
+        element: <Mission />,
+      },
+      {
+        path: '/Contact',
+        element: <Contact />,
+      },
+      {
+        path: '/Request',
+        element: <Request />,
       },
     ],
   },
