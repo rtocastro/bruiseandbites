@@ -8,7 +8,6 @@ function Footer() {
   return (
     <>
     <Link >
-    
     <img src={iglogo} className='footer-btn'/>
     </Link>
     <p>follow us on IG!</p>

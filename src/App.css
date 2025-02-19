@@ -62,6 +62,7 @@
   }
 }
 
+/* header css */
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -74,4 +75,28 @@
 .header-right {
   display: flex;
   align-items: center;
+}
+
+/* Menu page CSS */
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: white;
+}
+
+.text-section {
+  flex: 1;
+  max-width: 60%;
+}
+
+.image-section {
+  flex: 1;
+  max-width: 40%;
+}
+
+.community-image {
+  width: 100%;
+  height: auto;
 }
