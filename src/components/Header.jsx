@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ordernow from '../assets/ordernowbutt.png';
 import homebutt from '../assets/homebutt.png';
-// import app from '../App'
 
 function Header() {
   return (

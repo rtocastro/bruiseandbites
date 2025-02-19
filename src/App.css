@@ -48,6 +48,13 @@
   height: auto;
 }
 
+.footer-btn {
+  max-width: 50px;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+}
+
 @media (max-width: 768px) {
   .header-btn {
     max-width: 120px;
