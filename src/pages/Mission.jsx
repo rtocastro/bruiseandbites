@@ -1,18 +1,22 @@
-import React from 'react'
+import React from 'react';
 
 import commimg from '../assets/communityimg.png';
-// import aboutpb from '../assets/aboutpb.png'
-
+import aboutpb from '../assets/aboutpb.png';
 
 function Mission() {
-
   return (
-<div className="menu-container">
+    <>
+    <br />
+    <div className="mission-container">
       <div className="text-section">
-        <h2>Welcome to PB's Brews & Bites.
-          <br />
-          Where Bold Brews and Epic PB&Js Collide!</h2>
-          <br />
+
+        <div className="image-section">
+          <img src={commimg} alt="Community" className="community-image" />
+        </div>
+
+        <h2>Welcome to PB's Brews & Bites.</h2>
+        <h3>Where Bold Brews and Epic PB&Js Collide!</h3>
+        <br />
         <p>
           Nestled in the heart of Van Nuys, PB’s Brews & Bites was born from a love of top-notch coffee and the timeless perfection of a peanut butter and jelly sandwich. We’re all about crafting the kind of cozy, feel-good experience that makes you want to kick back, sip, and savor every bite.
           <br /><br />
@@ -26,15 +30,18 @@ function Mission() {
           <br /><br />
           Come see us and taste the difference. We can’t wait to serve you!
         </p>
+
+        <br />
+
+        <div className="image-section">
+        <img src={aboutpb} alt="About PB" className="about-image" />
       </div>
-      <div className="image-section">
-        <img src={commimg} alt="Community" className="community-image" />
       </div>
-      <div>
-        {/* <img src={aboutpb} /> */}
-      </div>
+
     </div>
-  )
+
+    </>
+  );
 }
 
-export default Mission
+export default Mission;

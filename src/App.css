@@ -77,26 +77,31 @@
   align-items: center;
 }
 
-/* Menu page CSS */
-.menu-container {
+/* Mission page CSS */
+.mission-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 25px;
   color: white;
 }
-
+/* 
 .text-section {
   flex: 1;
   max-width: 60%;
-}
+} */
 
-.image-section {
-  flex: 1;
+/* .image-section {
+  flex: 2;
   max-width: 40%;
+} */
+
+.about-image {
+  width: 50%;
+  height: auto;
 }
 
 .community-image {
-  width: 100%;
+  width: 50%;
   height: auto;
 }
