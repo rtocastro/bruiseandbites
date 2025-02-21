@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
 
-    allowedHosts: ['bruiseandbites.onrender.com/'] // https://bruiseandbites.onrender.com/
+    allowedHosts: ['bruiseandbites.onrender.com'] // https://bruiseandbites.onrender.com/
 }
 })
