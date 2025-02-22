@@ -14,7 +14,10 @@ function Mission() {
           <img src={commimg} alt="Community" className="community-image" />
         </div>
 
+          <font color="#30fc8bde" >
+            
         <h2>Welcome to PB's Brews & Bites.</h2>
+          
         <h3>Where Bold Brews and Epic PB&Js Collide!</h3>
         <br />
         <p>
@@ -30,6 +33,8 @@ function Mission() {
           <br /><br />
           Come see us and taste the difference. We can’t wait to serve you!
         </p>
+        </font>
+
 
         <br />
 
