@@ -1,11 +1,14 @@
 import React from 'react'
+import ReqForm from '../components/ReqForm'
 
 
 function Request() {
 
   return (
     <>
-<h1>this is the Request page</h1>
+<h1>Suggestions</h1>
+<ReqForm />
+
     </>
   )
 }
