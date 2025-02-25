@@ -6,7 +6,7 @@ import sandwichpic from '../assets/sandwichpic.png'
 
 function Menu() {
   return (
-    <><h1>this is the menu page</h1>
+    <><h1>Menu</h1>
     
     <img src={brewspic} />
     <br />

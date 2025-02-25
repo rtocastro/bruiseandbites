@@ -7,7 +7,8 @@ export default function Home() {
   return (
     <>
       <NavTabs />
-      <h1>this is the HOME page</h1>
+      <br />
+      <br />
     </>
   )
 }

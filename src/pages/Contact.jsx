@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function Contact() {
   return (
     <>
-      <h1>This is the Contact page</h1>
+      <h1>Contact Us</h1>
 
       <div>
         <p>
