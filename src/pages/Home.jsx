@@ -6,6 +6,8 @@ import NavTabs from '../components/NavTabs';
 export default function Home() {
   return (
     <>
+    <br />
+    <br />
       <NavTabs />
       <br />
       <br />
