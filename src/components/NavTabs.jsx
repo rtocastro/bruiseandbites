@@ -66,6 +66,14 @@ function NavTabs() {
                     {/* Request page is not clickable */}
                 </Link>
             </div>
+            <div className="nav-item">
+                <Link
+                    to="/Contributions"
+                    className={currentPage === '/Contributions' ? 'nav-link active' : 'nav-link'}
+                >
+                    {/* Contributions maybe located here? */}
+                </Link>
+            </div>
 
 
         </div>

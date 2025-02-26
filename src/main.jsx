@@ -11,6 +11,7 @@ import Discount from './pages/Discount.jsx'
 import Mission from './pages/Mission.jsx'
 import Contact from './pages/Contact.jsx'
 import Request from './pages/Request.jsx'
+import Contributions from './pages/Contributions.jsx'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: '/Request',
         element: <Request />,
+      },
+      {
+        path: '/Contributions',
+        element: <Contributions />,
       },
     ],
   },
