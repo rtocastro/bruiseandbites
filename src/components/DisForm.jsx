@@ -34,7 +34,7 @@ function DisForm() {
         let emailBody = "Greetings, please process my card :)\n\n";
         let imageToAttach = null;
 
-        if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35")) {
+        if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35") || ("Apt 35")) {
             imageToAttach = dishunny;
         } else if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406") {
             imageToAttach = disquart;
