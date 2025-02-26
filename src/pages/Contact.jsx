@@ -35,7 +35,7 @@ function Contact() {
       {/* Buttons at the bottom */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
         <a href="tel:+18186507462" style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', textDecoration: 'none', borderRadius: '5px' }}>Call</a>
-        <Link to="/Request" style={{ padding: '10px 20px', backgroundColor: '#28a745', color: 'white', textDecoration: 'none', borderRadius: '5px' }}>Requests</Link>
+        <Link to="/Request" style={{ padding: '10px 20px', backgroundColor: '#30fc8bde', color: 'white', textDecoration: 'none', borderRadius: '5px' }}>Requests</Link>
       </div>
       <br />
       <br />
