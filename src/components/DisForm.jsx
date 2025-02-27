@@ -35,17 +35,17 @@ function DisForm() {
     
         let imageUrl = "";
         if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35")) {
-            imageUrl = 'https://www.freeiconspng.com/uploads/cat-png-17.png';
+            imageUrl = 'https://iili.io/3dRAj29.webp';
         } else if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406") {
-            imageUrl = "https://freeimage.host/i/3dRAw7e";
+            imageUrl = "https://iili.io/3dRAw7e.webp";
         } else if (vipNames.includes(formData.name)) {
-            imageUrl = "https://freeimage.host/i/3dRAVB2";
+            imageUrl = "https://iili.io/3dRAVB2.webp";
         } else if (specialZipCodes.includes(formData.zip)) {
-            imageUrl = "https://freeimage.host/i/3dRAW1S";
+            imageUrl = "https://iili.io/3dRAW1S.webp";
         } else if (eligibleZipCodes.includes(formData.zip)) {
-            imageUrl = "https://freeimage.host/i/3dRANku";
+            imageUrl = "https://iili.io/3dRANku.webp";
         } else {
-            imageUrl = "https://freeimage.host/i/3dRAXr7";
+            imageUrl = "https://iili.io/3dRAXr7.webp";
         }
     
         emailBody += `Name: ${formData.name}\nAddress: ${formData.address}\nUnit: ${formData.unit}\nCity: ${formData.city}\nZip: ${formData.zip}\nFeedback: ${formData.feedback}\n\n`;
