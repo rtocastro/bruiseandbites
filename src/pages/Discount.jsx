@@ -6,7 +6,7 @@ function Discount() {
 
   return (
     <>
-<h1>this is the Discount page</h1>
+<h1>Discount Card</h1>
 <DisForm />
     </>
   )

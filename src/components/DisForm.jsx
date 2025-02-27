@@ -32,28 +32,28 @@ function DisForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let emailBody = "Greetings, please process my card :)\n\n";
-        let imageToAttach = null;
-
-        if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35") || ("Apt 35")) {
-            imageToAttach = dishunny;
+    
+        let imageUrl = "";
+        if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35")) {
+            imageUrl = 'https://www.freeiconspng.com/uploads/cat-png-17.png';
         } else if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406") {
-            imageToAttach = disquart;
+            imageUrl = "https://freeimage.host/i/3dRAw7e";
         } else if (vipNames.includes(formData.name)) {
-            imageToAttach = disfitty;
+            imageUrl = "https://freeimage.host/i/3dRAVB2";
         } else if (specialZipCodes.includes(formData.zip)) {
-            imageToAttach = disdub;
+            imageUrl = "https://freeimage.host/i/3dRAW1S";
         } else if (eligibleZipCodes.includes(formData.zip)) {
-            imageToAttach = disten;
+            imageUrl = "https://freeimage.host/i/3dRANku";
         } else {
-            imageToAttach = disfive;
+            imageUrl = "https://freeimage.host/i/3dRAXr7";
         }
-
+    
         emailBody += `Name: ${formData.name}\nAddress: ${formData.address}\nUnit: ${formData.unit}\nCity: ${formData.city}\nZip: ${formData.zip}\nFeedback: ${formData.feedback}\n\n`;
-        if (imageToAttach) {
-            emailBody += `Attached Image: ${imageToAttach}`;
+        if (imageUrl) {
+            emailBody += `<img src="${imageUrl}">`;
         }
-
-        window.location.href = `mailto:ricktorres@live.com?subject=My Discount Card&body=${encodeURIComponent(emailBody)}`;
+    
+        window.location.href = `mailto:ricktorres@live.com?subject=My Personal Discount Card&body=${encodeURIComponent(emailBody)}`;
     };
 
     return (

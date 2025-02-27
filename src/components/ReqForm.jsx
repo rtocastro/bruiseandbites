@@ -67,7 +67,7 @@ function ReqForm() {
       </label>
       <br />
       <br />
-      <button type="submit" backgroundColor='blue' >Submit</button>
+      <button type="submit" >Submit</button>
       <br />
       <br />
     </form>
