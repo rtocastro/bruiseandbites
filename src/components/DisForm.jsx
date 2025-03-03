@@ -35,7 +35,7 @@ function DisForm() {
     
         let imageUrl = "";
         if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406" && formData.unit.includes("35")) {
-            imageUrl = 'https://iili.io/3dRAj29.webp';
+            imageUrl = 'https://i.ibb.co/dsmFTtYN/dishunny.png';
         } else if (formData.address.includes("7540 Haskell Ave") && formData.zip === "91406") {
             imageUrl = "https://iili.io/3dRAw7e.webp";
         } else if (vipNames.includes(formData.name)) {
@@ -50,7 +50,7 @@ function DisForm() {
     
         emailBody += `Name: ${formData.name}\nAddress: ${formData.address}\nUnit: ${formData.unit}\nCity: ${formData.city}\nZip: ${formData.zip}\nFeedback: ${formData.feedback}\n\n`;
         if (imageUrl) {
-            emailBody += `<img src="${imageUrl}">`;
+            emailBody += `<img src="${imageUrl}" />`;
         }
     
         window.location.href = `mailto:ricktorres@live.com?subject=My Personal Discount Card&body=${encodeURIComponent(emailBody)}`;

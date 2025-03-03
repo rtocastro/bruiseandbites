@@ -49,6 +49,8 @@ https://unsplash.com/@emilybernal
 Tri Hartono
 https://thenounproject.com/creator/onomailbox/
 
+Styfico
+https://thenounproject.com/creator/styfico/
 
 
 Free Fair & Healthy
