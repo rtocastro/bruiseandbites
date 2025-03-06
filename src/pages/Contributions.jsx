@@ -52,6 +52,8 @@ https://thenounproject.com/creator/onomailbox/
 Styfico
 https://thenounproject.com/creator/styfico/
 
+Zach Bogart
+https://thenounproject.com/creator/zachbogart/
 
 Free Fair & Healthy
 https://thenounproject.com/creator/freefairhealthy
