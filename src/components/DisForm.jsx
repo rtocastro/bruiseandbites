@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import disfive from '../assets/disfive.png';
-import disten from '../assets/disten.png';
-import disdub from '../assets/disdub.png';
-import disquart from '../assets/disquart.png';
-import disfitty from '../assets/disfitty.png';
-import dishunny from '../assets/dishunny.png';
+// import disfive from '../assets/disfive.png';
+// import disten from '../assets/disten.png';
+// import disdub from '../assets/disdub.png';
+// import disquart from '../assets/disquart.png';
+// import disfitty from '../assets/disfitty.png';
+// import dishunny from '../assets/dishunny.png';
 
 function DisForm() {
     const [formData, setFormData] = useState({
