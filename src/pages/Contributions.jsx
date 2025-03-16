@@ -55,6 +55,9 @@ https://thenounproject.com/creator/styfico/
 Zach Bogart
 https://thenounproject.com/creator/zachbogart/
 
+Anissa
+https://thenounproject.com/creator/adeannisa0102/
+
 Free Fair & Healthy
 https://thenounproject.com/creator/freefairhealthy
 
