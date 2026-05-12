@@ -1,60 +1,16 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
-//pages imported to router
-import Home from './pages/Home.jsx';
-import Entry from './pages/Entry.jsx'
-import Menu from './pages/Menu.jsx'
-import Discount from './pages/Discount.jsx'
-import Mission from './pages/Mission.jsx'
-import Contact from './pages/Contact.jsx'
-import Request from './pages/Request.jsx'
-import Contributions from './pages/Contributions.jsx'
+import App from "./App.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: <Entry />,
-      },
-      {
-        path: '/Home',
-        element: <Home />,
-      },
-      {
-        path: '/Menu',
-        element: <Menu />,
-      },
-      {
-        path: '/Discount',
-        element: <Discount />,
-      },
-      {
-        path: '/Mission',
-        element: <Mission />,
-      },
-      {
-        path: '/Contact',
-        element: <Contact />,
-      },
-      {
-        path: '/Request',
-        element: <Request />,
-      },
-      {
-        path: '/Contributions',
-        element: <Contributions />,
-      },
-    ],
-  },
-]);
+import "./styles/variables.css";
+import "./styles/layout.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
