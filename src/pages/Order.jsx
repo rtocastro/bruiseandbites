@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
 import { useCartStore } from "../store/useCartStore";
+import { db } from "../firebase/firebaseConfig";
 
 function Order() {
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     register,
@@ -19,19 +25,39 @@ function Order() {
     0
   );
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    if (cart.length === 0) return;
+
+    setIsSubmitting(true);
+    setSuccessMessage("");
+
     const orderPayload = {
       customer: data,
-      cart,
+      items: cart.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        lineTotal: item.price * item.quantity,
+      })),
       subtotal,
-      createdAt: new Date().toISOString(),
+      status: "new",
+      source: "PBs Brews & Bites website",
+      createdAt: serverTimestamp(),
     };
 
-    console.log("ORDER SUBMITTED:", orderPayload);
-    alert("Order request submitted!");
+    try {
+      await addDoc(collection(db, "orders"), orderPayload);
 
-    clearCart();
-    reset();
+      setSuccessMessage("Order request submitted! We’ll follow up soon.");
+      clearCart();
+      reset();
+    } catch (error) {
+      console.error("ORDER SAVE ERROR:", error);
+      alert("Something went wrong saving the order. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -40,6 +66,8 @@ function Order() {
         <p className="eyebrow">Almost snack time</p>
         <h1>Place Your Order</h1>
         <p>Submit your order request and we’ll coordinate pickup/payment.</p>
+
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
 
       {cart.length === 0 ? (
@@ -80,8 +108,12 @@ function Order() {
               />
             </label>
 
-            <button type="submit" className="submit-order-button">
-              Submit Order Request
+            <button
+              type="submit"
+              className="submit-order-button"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Order Request"}
             </button>
           </form>
 
