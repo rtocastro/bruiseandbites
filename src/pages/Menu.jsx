@@ -8,7 +8,8 @@ import coldBrew from "../assets/coldbrew.png";
 
 function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [showAdmin, setShowAdmin] = useState(false);
+  const isAdminMode = new URLSearchParams(window.location.search).get("admin") === "true";
+  const [showAdmin, setShowAdmin] = useState(isAdminMode);
 
   const [products, setProducts] = useState([
     {
@@ -149,8 +150,8 @@ function Menu() {
                   {isSoldOut
                     ? "Sold Out"
                     : isMaxedOut
-                    ? "All Available Added"
-                    : "Add to Order"}
+                      ? "All Available Added"
+                      : "Add to Order"}
                 </button>
               </div>
             </article>
@@ -158,6 +159,7 @@ function Menu() {
         })}
       </div>
 
+        {isAdminMode && (
       <div className="admin-toggle-wrap">
         <button
           className="admin-toggle-button"
@@ -166,6 +168,7 @@ function Menu() {
           {showAdmin ? "Hide Inventory Controls" : "Owner Inventory Controls"}
         </button>
       </div>
+      )}
 
       {showAdmin && (
         <AdminPanel
