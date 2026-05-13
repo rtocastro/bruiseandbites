@@ -1,5 +1,6 @@
 import React from "react";
 import { useCartStore } from "../store/useCartStore";
+import { Link } from "react-router-dom";
 
 function CartDrawer({ isOpen, onClose }) {
   const cart = useCartStore((state) => state.cart);
@@ -77,9 +78,11 @@ function CartDrawer({ isOpen, onClose }) {
                 <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
               </p>
 
-              <button className="checkout-button">
-                Continue to Request
-              </button>
+
+
+<Link to="/order" className="checkout-button" onClick={onClose}>
+  Continue to Order
+</Link>
 
               <button className="clear-cart" onClick={clearCart}>
                 Clear Cart

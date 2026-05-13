@@ -12,6 +12,7 @@ import Menu from "./pages/Menu";
 import Mission from "./pages/Mission";
 import Contact from "./pages/Contact";
 import Request from "./pages/Request";
+import Order from "./pages/Order";
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -31,6 +32,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/request" element={<Request />} />
           <Route path="*" element={<Entry />} />
+          <Route path="/order" element={<Order />} />
         </Routes>
       </main>
 
