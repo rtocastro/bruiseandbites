@@ -339,6 +339,79 @@
   margin-top: 3rem;
 }
 
+.in-cart-note {
+  font-weight: 800;
+  opacity: 0.85;
+  font-size: 0.95rem;
+}
+
+
+.batch-note {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 0.35rem;
+  font-style: italic;
+}
+
+
+.admin-panel {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 2px solid rgba(255,255,255,0.08);
+}
+
+.admin-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.05);
+}
+
+.admin-card img {
+  width: 120px;
+  border-radius: 1rem;
+}
+
+.admin-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-controls button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.admin-toggle-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-weight: 900;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.admin-toggle-button:hover {
+  opacity: 1;
+}
+
 @media (max-width: 700px) {
   .header-container {
     grid-template-columns: 80px 1fr 80px;
