@@ -207,6 +207,138 @@
   cursor: not-allowed;
 }
 
+.cart-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.order-img {
+  display: none;
+}
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 50;
+}
+
+.cart-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(420px, 92vw);
+  height: 100vh;
+  background: #3f3634;
+  color: #f7f0e8;
+  padding: 1.25rem;
+  transform: translateX(100%);
+  transition: 0.3s ease;
+  z-index: 60;
+  overflow-y: auto;
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.35);
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-header,
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-close {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.cart-items {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cart-item img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.cart-item h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+}
+
+.cart-qty button,
+.remove-item,
+.checkout-button,
+.clear-cart {
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cart-qty button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.remove-item,
+.clear-cart {
+  opacity: 0.8;
+}
+
+.cart-footer {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.checkout-button {
+  background: #38ef7d;
+}
+
+.empty-cart {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 @media (max-width: 700px) {
   .header-container {
     grid-template-columns: 80px 1fr 80px;

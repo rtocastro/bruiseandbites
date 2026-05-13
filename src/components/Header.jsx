@@ -1,11 +1,15 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useCartStore } from "../store/useCartStore";
 
 import orderNow from "../assets/ordernowbutt.png";
 import homeButton from "../assets/homebutt.png";
 import pbMain from "../assets/pbmain.png";
 
-function Header() {
+function Header({ onCartOpen }) {
+  const cart = useCartStore((state) => state.cart);
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <header className="header-container">
       <Link to="/home" className="header-image-link" aria-label="Go home">
@@ -16,7 +20,11 @@ function Header() {
         <img src={pbMain} alt="PB's Brews & Bites" className="brand-logo" />
       </Link>
 
-      <Link to="/menu" className="header-image-link" aria-label="Order now">
+      <button className="cart-button" onClick={onCartOpen}>
+        Cart ({cartCount})
+      </button>
+
+      <Link to="/menu" className="header-image-link order-img" aria-label="Order now">
         <img src={orderNow} alt="Order Now" className="header-btn" />
       </Link>
 
