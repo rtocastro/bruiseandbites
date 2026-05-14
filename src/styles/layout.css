@@ -498,6 +498,12 @@
   background: rgba(56, 239, 125, 0.18);
 }
 
+.order-form select {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
+}
+
 @media (max-width: 850px) {
   .order-layout {
     grid-template-columns: 1fr;
