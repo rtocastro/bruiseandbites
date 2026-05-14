@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { categories } from "../data/menuItems";
 import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
+import DailySpecial from "../components/DailySpecial";
 
 import {
   getInventory,
@@ -25,6 +26,7 @@ const starterProducts = [
     isAvailable: true,
     ingredients: ["Peanut butter", "Strawberry jam", "White bread"],
     batchNote: "Fresh batch prepared overnight.",
+    featured: false,
   },
   {
     id: "cold-brew-black",
@@ -38,6 +40,8 @@ const starterProducts = [
     isAvailable: true,
     ingredients: ["Organic dark roast coffee"],
     batchNote: "Cold brew steeped overnight.",
+    featured: true,
+specialNote: "Stronger than the will of your grocery bags to hold stuff.",
   },
 ];
 
@@ -153,6 +157,25 @@ function Menu() {
         <h1>Menu</h1>
         <p>Simple brews and bites made for quick morning fuel.</p>
       </div>
+
+      <DailySpecial
+  item={products.find((item) => item.featured)}
+  onAdd={addItem}
+  remainingStock={Math.max(
+    (products.find((item) => item.featured)?.stock || 0) -
+      getCartQuantity(products.find((item) => item.featured)?.id),
+    0
+  )}
+  isSoldOut={
+    !products.find((item) => item.featured)?.isAvailable ||
+    products.find((item) => item.featured)?.stock <= 0 ||
+    Math.max(
+      (products.find((item) => item.featured)?.stock || 0) -
+        getCartQuantity(products.find((item) => item.featured)?.id),
+      0
+    ) <= 0
+  }
+/>
 
       <div className="category-tabs">
         {categories.map((category) => (
