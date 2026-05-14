@@ -1,47 +1,93 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { categories } from "../data/menuItems";
 import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
 
+import {
+  getInventory,
+  seedInventory,
+  updateInventoryItem,
+} from "../services/inventoryService";
+
 import classicPbj from "../assets/classicpbj.png";
 import coldBrew from "../assets/coldbrew.png";
 
+const starterProducts = [
+  {
+    id: "classic-pbj-strawberry",
+    name: "Classic PB&J (Strawberry)",
+    category: "Bite",
+    price: 2.22,
+    image: classicPbj,
+    description: "Strawberry PB&J on soft white bread.",
+    stock: 12,
+    dailyLimit: 12,
+    isAvailable: true,
+    ingredients: ["Peanut butter", "Strawberry jam", "White bread"],
+    batchNote: "Fresh batch prepared overnight.",
+  },
+  {
+    id: "cold-brew-black",
+    name: "Cold Brew (Black)",
+    category: "Brew",
+    price: 5.55,
+    image: coldBrew,
+    description: "Iced cold brew coffee.",
+    stock: 8,
+    dailyLimit: 8,
+    isAvailable: true,
+    ingredients: ["Organic dark roast coffee"],
+    batchNote: "Cold brew steeped overnight.",
+  },
+];
+
 function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const isAdminMode = new URLSearchParams(window.location.search).get("admin") === "true";
-  const [showAdmin, setShowAdmin] = useState(isAdminMode);
+  const [products, setProducts] = useState(starterProducts);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [products, setProducts] = useState([
-    {
-      id: "classic-pbj-strawberry",
-      name: "Classic PB&J (Strawberry)",
-      category: "Bite",
-      price: 2.22,
-      image: classicPbj,
-      description: "Strawberry PB&J on soft white bread.",
-      stock: 12,
-      dailyLimit: 12,
-      isAvailable: true,
-      ingredients: ["Peanut butter", "Strawberry jam", "White bread"],
-      batchNote: "Fresh batch prepared overnight.",
-    },
-    {
-      id: "cold-brew-black",
-      name: "Cold Brew (Black)",
-      category: "Brew",
-      price: 5.55,
-      image: coldBrew,
-      description: "Iced cold brew coffee.",
-      stock: 8,
-      dailyLimit: 8,
-      isAvailable: true,
-      ingredients: ["Organic dark roast coffee"],
-      batchNote: "Cold brew steeped overnight.",
-    },
-  ]);
+  const isAdminMode =
+    new URLSearchParams(window.location.search).get("admin") === "true";
+
+  const [showAdmin, setShowAdmin] = useState(isAdminMode);
 
   const cart = useCartStore((state) => state.cart);
   const addItem = useCartStore((state) => state.addItem);
+
+  useEffect(() => {
+    const loadInventory = async () => {
+      try {
+        const inventory = await getInventory();
+
+        if (inventory.length === 0) {
+          await seedInventory(starterProducts);
+          setProducts(starterProducts);
+        } else {
+          const mergedProducts = starterProducts.map((product) => {
+            const savedItem = inventory.find((item) => item.id === product.id);
+
+            return savedItem
+              ? {
+                  ...product,
+                  stock: savedItem.stock,
+                  dailyLimit: savedItem.dailyLimit,
+                  isAvailable: savedItem.isAvailable,
+                  batchNote: savedItem.batchNote,
+                }
+              : product;
+          });
+
+          setProducts(mergedProducts);
+        }
+      } catch (error) {
+        console.error("Inventory load error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadInventory();
+  }, []);
 
   const filteredItems =
     activeCategory === "All"
@@ -53,30 +99,52 @@ function Menu() {
     return cartItem ? cartItem.quantity : 0;
   };
 
-  const handleUpdateStock = (id, amount) => {
+  const handleUpdateStock = async (id, amount) => {
+    const itemToUpdate = products.find((item) => item.id === id);
+    if (!itemToUpdate) return;
+
+    const updatedStock = Math.max(itemToUpdate.stock + amount, 0);
+
     setProducts((prev) =>
-      prev.map((item) => {
-        if (item.id !== id) return item;
-
-        const updatedStock = Math.max(item.stock + amount, 0);
-
-        return {
-          ...item,
-          stock: updatedStock,
-        };
-      })
+      prev.map((item) =>
+        item.id === id ? { ...item, stock: updatedStock } : item
+      )
     );
+
+    await updateInventoryItem(id, {
+      stock: updatedStock,
+    });
   };
 
-  const handleToggleAvailability = (id) => {
+  const handleToggleAvailability = async (id) => {
+    const itemToUpdate = products.find((item) => item.id === id);
+    if (!itemToUpdate) return;
+
+    const updatedAvailability = !itemToUpdate.isAvailable;
+
     setProducts((prev) =>
       prev.map((item) =>
         item.id === id
-          ? { ...item, isAvailable: !item.isAvailable }
+          ? { ...item, isAvailable: updatedAvailability }
           : item
       )
     );
+
+    await updateInventoryItem(id, {
+      isAvailable: updatedAvailability,
+    });
   };
+
+  if (isLoading) {
+    return (
+      <section className="menu-page">
+        <div className="page-intro">
+          <p className="eyebrow">Loading today&apos;s batch...</p>
+          <h1>Menu</h1>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="menu-page">
@@ -150,8 +218,8 @@ function Menu() {
                   {isSoldOut
                     ? "Sold Out"
                     : isMaxedOut
-                      ? "All Available Added"
-                      : "Add to Order"}
+                    ? "All Available Added"
+                    : "Add to Order"}
                 </button>
               </div>
             </article>
@@ -159,15 +227,15 @@ function Menu() {
         })}
       </div>
 
-        {isAdminMode && (
-      <div className="admin-toggle-wrap">
-        <button
-          className="admin-toggle-button"
-          onClick={() => setShowAdmin((prev) => !prev)}
-        >
-          {showAdmin ? "Hide Inventory Controls" : "Owner Inventory Controls"}
-        </button>
-      </div>
+      {isAdminMode && (
+        <div className="admin-toggle-wrap">
+          <button
+            className="admin-toggle-button"
+            onClick={() => setShowAdmin((prev) => !prev)}
+          >
+            {showAdmin ? "Hide Inventory Controls" : "Owner Inventory Controls"}
+          </button>
+        </div>
       )}
 
       {showAdmin && (
