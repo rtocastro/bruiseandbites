@@ -504,6 +504,34 @@
   padding: 0.9rem 1rem;
 }
 
+.paypal-box {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.order-form select {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
+}
+
+.paypal-box {
+  max-width: 520px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.paypal-box iframe {
+  max-width: 100%;
+}
+
+.order-form {
+  overflow: hidden;
+}
+
 @media (max-width: 850px) {
   .order-layout {
     grid-template-columns: 1fr;
