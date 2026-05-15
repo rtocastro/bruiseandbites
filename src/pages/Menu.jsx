@@ -4,6 +4,8 @@ import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
 import DailySpecial from "../components/DailySpecial";
 import NutritionModal from "../components/NutritionModal";
+import { getOrderWindowStatus } from "../utils/orderWindow";
+import OrderWindowBanner from "../components/OrderWindowBanner";
 
 import {
   getInventory,
@@ -39,13 +41,13 @@ function Menu() {
 
             return savedItem
               ? {
-                  ...product,
-                  stock: savedItem.stock,
-                  dailyLimit: savedItem.dailyLimit,
-                  isAvailable: savedItem.isAvailable,
-                  batchNote: savedItem.batchNote,
-                  featured: savedItem.featured ?? product.featured,
-                }
+                ...product,
+                stock: savedItem.stock,
+                dailyLimit: savedItem.dailyLimit,
+                isAvailable: savedItem.isAvailable,
+                batchNote: savedItem.batchNote,
+                featured: savedItem.featured ?? product.featured,
+              }
               : product;
           });
 
@@ -70,6 +72,8 @@ function Menu() {
     const cartItem = cart.find((item) => item.id === id);
     return cartItem ? cartItem.quantity : 0;
   };
+
+  const { isOpen: isOrderWindowOpen } = getOrderWindowStatus();
 
   const featuredItem = products.find((item) => item.featured);
 
@@ -133,6 +137,9 @@ function Menu() {
     );
   }
 
+
+  
+
   return (
     <section className="menu-page">
       <div className="page-intro">
@@ -140,6 +147,8 @@ function Menu() {
         <h1>Menu</h1>
         <p>Simple brews and bites made for quick morning fuel.</p>
       </div>
+
+      <OrderWindowBanner />
 
       <DailySpecial
         item={featuredItem}
@@ -171,6 +180,7 @@ function Menu() {
           const remainingStock = Math.max(item.stock - cartQuantity, 0);
           const isSoldOut = item.stock <= 0 || !item.isAvailable;
           const isMaxedOut = remainingStock <= 0;
+
 
           return (
             <article className="product-card" key={item.id}>
@@ -204,6 +214,7 @@ function Menu() {
                   </p>
                 )}
 
+
                 <details>
                   <summary>Ingredients</summary>
                   <p>{item.ingredients.join(", ")}</p>
@@ -218,14 +229,16 @@ function Menu() {
 
                 <button
                   className="order-button"
-                  disabled={isSoldOut || isMaxedOut}
+                  disabled={!isOrderWindowOpen || isSoldOut || isMaxedOut}
                   onClick={() => addItem(item)}
                 >
-                  {isSoldOut
-                    ? "Sold Out"
-                    : isMaxedOut
-                    ? "All Available Added"
-                    : "Add to Order"}
+                  {!isOrderWindowOpen
+                    ? "Ordering Closed"
+                    : isSoldOut
+                      ? "Sold Out"
+                      : isMaxedOut
+                        ? "All Available Added"
+                        : "Add to Order"}
                 </button>
               </div>
             </article>

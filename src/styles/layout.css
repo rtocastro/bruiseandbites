@@ -617,6 +617,22 @@
   margin: 0.75rem 0.5rem;
 }
 
+.order-window-banner {
+  margin: 1.5rem auto 2rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  max-width: 720px;
+}
+
+.order-window-banner.open {
+  background: rgba(56, 239, 125, 0.13);
+}
+
+.order-window-banner.closed {
+  background: rgba(255, 75, 62, 0.13);
+}
+
 @media (max-width: 800px) {
   .daily-special {
     grid-template-columns: 1fr;
