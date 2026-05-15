@@ -554,6 +554,69 @@
   margin: 0.25rem 0;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 80;
+}
+
+.nutrition-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(520px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  background: #3f3634;
+  color: #f7f0e8;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  z-index: 90;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.nutrition-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.nutrition-list p {
+  margin: 0;
+}
+
+.nutrition-notes ul {
+  margin-top: 0.5rem;
+}
+
+.ingredient-block {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nutrition-button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  margin: 0.75rem 0.5rem;
+}
+
 @media (max-width: 800px) {
   .daily-special {
     grid-template-columns: 1fr;

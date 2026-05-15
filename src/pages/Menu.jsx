@@ -3,6 +3,7 @@ import { categories } from "../data/menuItems";
 import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
 import DailySpecial from "../components/DailySpecial";
+import NutritionModal from "../components/NutritionModal";
 
 import {
   getInventory,
@@ -66,6 +67,7 @@ function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [products, setProducts] = useState(starterProducts);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedNutritionItem, setSelectedNutritionItem] = useState(null);
 
   const isAdminMode =
     new URLSearchParams(window.location.search).get("admin") === "true";
@@ -251,6 +253,13 @@ function Menu() {
                 </details>
 
                 <button
+                  className="nutrition-button"
+                  onClick={() => setSelectedNutritionItem(item)}
+                >
+                  View Nutrition
+                </button>
+
+                <button
                   className="order-button"
                   disabled={isSoldOut || isMaxedOut}
                   onClick={() => addItem(item)}
@@ -286,6 +295,12 @@ function Menu() {
           onMakeSpecial={handleMakeSpecial}
         />
       )}
+
+      <NutritionModal
+        item={selectedNutritionItem}
+        onClose={() => setSelectedNutritionItem(null)}
+      />
+
     </section>
   );
 }
