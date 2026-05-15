@@ -4,7 +4,7 @@ import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
 import DailySpecial from "../components/DailySpecial";
 import NutritionModal from "../components/NutritionModal";
-import { getOrderWindowStatus } from "../utils/orderrWindow";
+import { getOrderWindowStatus } from "../utils/orderWindow";
 import OrderWindowBanner from "../components/OrderWindowBanner";
 
 import {
