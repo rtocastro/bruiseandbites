@@ -41,9 +41,26 @@ const starterProducts = [
     ingredients: ["Organic dark roast coffee"],
     batchNote: "Cold brew steeped overnight.",
     featured: true,
-specialNote: "Stronger than the will of your grocery bags to hold stuff.",
+    specialNote: "Stronger than the will of your grocery bags to hold stuff.",
   },
 ];
+
+const handleMakeSpecial = async (id) => {
+  const updatedProducts = products.map((item) => ({
+    ...item,
+    featured: item.id === id,
+  }));
+
+  setProducts(updatedProducts);
+
+  await Promise.all(
+    updatedProducts.map((item) =>
+      updateInventoryItem(item.id, {
+        featured: item.featured,
+      })
+    )
+  );
+};
 
 function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -72,12 +89,12 @@ function Menu() {
 
             return savedItem
               ? {
-                  ...product,
-                  stock: savedItem.stock,
-                  dailyLimit: savedItem.dailyLimit,
-                  isAvailable: savedItem.isAvailable,
-                  batchNote: savedItem.batchNote,
-                }
+                ...product,
+                stock: savedItem.stock,
+                dailyLimit: savedItem.dailyLimit,
+                isAvailable: savedItem.isAvailable,
+                batchNote: savedItem.batchNote,
+              }
               : product;
           });
 
@@ -159,23 +176,23 @@ function Menu() {
       </div>
 
       <DailySpecial
-  item={products.find((item) => item.featured)}
-  onAdd={addItem}
-  remainingStock={Math.max(
-    (products.find((item) => item.featured)?.stock || 0) -
-      getCartQuantity(products.find((item) => item.featured)?.id),
-    0
-  )}
-  isSoldOut={
-    !products.find((item) => item.featured)?.isAvailable ||
-    products.find((item) => item.featured)?.stock <= 0 ||
-    Math.max(
-      (products.find((item) => item.featured)?.stock || 0) -
-        getCartQuantity(products.find((item) => item.featured)?.id),
-      0
-    ) <= 0
-  }
-/>
+        item={products.find((item) => item.featured)}
+        onAdd={addItem}
+        remainingStock={Math.max(
+          (products.find((item) => item.featured)?.stock || 0) -
+          getCartQuantity(products.find((item) => item.featured)?.id),
+          0
+        )}
+        isSoldOut={
+          !products.find((item) => item.featured)?.isAvailable ||
+          products.find((item) => item.featured)?.stock <= 0 ||
+          Math.max(
+            (products.find((item) => item.featured)?.stock || 0) -
+            getCartQuantity(products.find((item) => item.featured)?.id),
+            0
+          ) <= 0
+        }
+      />
 
       <div className="category-tabs">
         {categories.map((category) => (
@@ -241,8 +258,8 @@ function Menu() {
                   {isSoldOut
                     ? "Sold Out"
                     : isMaxedOut
-                    ? "All Available Added"
-                    : "Add to Order"}
+                      ? "All Available Added"
+                      : "Add to Order"}
                 </button>
               </div>
             </article>
@@ -266,6 +283,7 @@ function Menu() {
           products={products}
           onUpdateStock={handleUpdateStock}
           onToggleAvailability={handleToggleAvailability}
+          onMakeSpecial={handleMakeSpecial}
         />
       )}
     </section>
