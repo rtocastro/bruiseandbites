@@ -1,5 +1,5 @@
 import React from "react";
-import { getOrderWindowStatus } from "../utils/orderWindow";
+import { getOrderWindowStatus } from "../utils/orderrWindow";
 
 import pbOpen from "../assets/pb-open-sign.png";
 import pbClosed from "../assets/pb-closed-sign.png";
