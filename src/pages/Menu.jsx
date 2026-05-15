@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { categories } from "../data/menuItems";
+import { menuItems, categories } from "../data/menuItems";
 import { useCartStore } from "../store/useCartStore";
 import AdminPanel from "../components/AdminPanel";
 import DailySpecial from "../components/DailySpecial";
@@ -11,61 +11,9 @@ import {
   updateInventoryItem,
 } from "../services/inventoryService";
 
-import classicPbj from "../assets/classicpbj.png";
-import coldBrew from "../assets/coldbrew.png";
-
-const starterProducts = [
-  {
-    id: "classic-pbj-strawberry",
-    name: "Classic PB&J (Strawberry)",
-    category: "Bite",
-    price: 2.22,
-    image: classicPbj,
-    description: "Strawberry PB&J on soft white bread.",
-    stock: 12,
-    dailyLimit: 12,
-    isAvailable: true,
-    ingredients: ["Peanut butter", "Strawberry jam", "White bread"],
-    batchNote: "Fresh batch prepared overnight.",
-    featured: false,
-  },
-  {
-    id: "cold-brew-black",
-    name: "Cold Brew (Black)",
-    category: "Brew",
-    price: 5.55,
-    image: coldBrew,
-    description: "Iced cold brew coffee.",
-    stock: 8,
-    dailyLimit: 8,
-    isAvailable: true,
-    ingredients: ["Organic dark roast coffee"],
-    batchNote: "Cold brew steeped overnight.",
-    featured: true,
-    specialNote: "Stronger than the will of your grocery bags to hold stuff.",
-  },
-];
-
-const handleMakeSpecial = async (id) => {
-  const updatedProducts = products.map((item) => ({
-    ...item,
-    featured: item.id === id,
-  }));
-
-  setProducts(updatedProducts);
-
-  await Promise.all(
-    updatedProducts.map((item) =>
-      updateInventoryItem(item.id, {
-        featured: item.featured,
-      })
-    )
-  );
-};
-
 function Menu() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [products, setProducts] = useState(starterProducts);
+  const [products, setProducts] = useState(menuItems);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedNutritionItem, setSelectedNutritionItem] = useState(null);
 
@@ -83,20 +31,21 @@ function Menu() {
         const inventory = await getInventory();
 
         if (inventory.length === 0) {
-          await seedInventory(starterProducts);
-          setProducts(starterProducts);
+          await seedInventory(menuItems);
+          setProducts(menuItems);
         } else {
-          const mergedProducts = starterProducts.map((product) => {
+          const mergedProducts = menuItems.map((product) => {
             const savedItem = inventory.find((item) => item.id === product.id);
 
             return savedItem
               ? {
-                ...product,
-                stock: savedItem.stock,
-                dailyLimit: savedItem.dailyLimit,
-                isAvailable: savedItem.isAvailable,
-                batchNote: savedItem.batchNote,
-              }
+                  ...product,
+                  stock: savedItem.stock,
+                  dailyLimit: savedItem.dailyLimit,
+                  isAvailable: savedItem.isAvailable,
+                  batchNote: savedItem.batchNote,
+                  featured: savedItem.featured ?? product.featured,
+                }
               : product;
           });
 
@@ -122,6 +71,12 @@ function Menu() {
     return cartItem ? cartItem.quantity : 0;
   };
 
+  const featuredItem = products.find((item) => item.featured);
+
+  const featuredRemainingStock = featuredItem
+    ? Math.max(featuredItem.stock - getCartQuantity(featuredItem.id), 0)
+    : 0;
+
   const handleUpdateStock = async (id, amount) => {
     const itemToUpdate = products.find((item) => item.id === id);
     if (!itemToUpdate) return;
@@ -134,9 +89,7 @@ function Menu() {
       )
     );
 
-    await updateInventoryItem(id, {
-      stock: updatedStock,
-    });
+    await updateInventoryItem(id, { stock: updatedStock });
   };
 
   const handleToggleAvailability = async (id) => {
@@ -147,15 +100,26 @@ function Menu() {
 
     setProducts((prev) =>
       prev.map((item) =>
-        item.id === id
-          ? { ...item, isAvailable: updatedAvailability }
-          : item
+        item.id === id ? { ...item, isAvailable: updatedAvailability } : item
       )
     );
 
-    await updateInventoryItem(id, {
-      isAvailable: updatedAvailability,
-    });
+    await updateInventoryItem(id, { isAvailable: updatedAvailability });
+  };
+
+  const handleMakeSpecial = async (id) => {
+    const updatedProducts = products.map((item) => ({
+      ...item,
+      featured: item.id === id,
+    }));
+
+    setProducts(updatedProducts);
+
+    await Promise.all(
+      updatedProducts.map((item) =>
+        updateInventoryItem(item.id, { featured: item.featured })
+      )
+    );
   };
 
   if (isLoading) {
@@ -178,21 +142,14 @@ function Menu() {
       </div>
 
       <DailySpecial
-        item={products.find((item) => item.featured)}
+        item={featuredItem}
         onAdd={addItem}
-        remainingStock={Math.max(
-          (products.find((item) => item.featured)?.stock || 0) -
-          getCartQuantity(products.find((item) => item.featured)?.id),
-          0
-        )}
+        remainingStock={featuredRemainingStock}
         isSoldOut={
-          !products.find((item) => item.featured)?.isAvailable ||
-          products.find((item) => item.featured)?.stock <= 0 ||
-          Math.max(
-            (products.find((item) => item.featured)?.stock || 0) -
-            getCartQuantity(products.find((item) => item.featured)?.id),
-            0
-          ) <= 0
+          !featuredItem ||
+          !featuredItem.isAvailable ||
+          featuredItem.stock <= 0 ||
+          featuredRemainingStock <= 0
         }
       />
 
@@ -267,8 +224,8 @@ function Menu() {
                   {isSoldOut
                     ? "Sold Out"
                     : isMaxedOut
-                      ? "All Available Added"
-                      : "Add to Order"}
+                    ? "All Available Added"
+                    : "Add to Order"}
                 </button>
               </div>
             </article>
@@ -300,7 +257,6 @@ function Menu() {
         item={selectedNutritionItem}
         onClose={() => setSelectedNutritionItem(null)}
       />
-
     </section>
   );
 }
