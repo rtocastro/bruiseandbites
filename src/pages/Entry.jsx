@@ -7,10 +7,10 @@ import mainlogo from '../assets/mainweblogopb.png'
 export default function Entry() {
   return (
     <>
-     <Link to='./Home'><img src={mainlogo} /></Link>
+      <Link to='./Home'><img src={mainlogo} /></Link>
       <h5>ENTRY PAGE</h5>
-     
- 
+
+
     </>
   )
 }
